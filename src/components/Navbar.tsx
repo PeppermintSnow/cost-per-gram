@@ -14,8 +14,8 @@ const Navbar = (): React.ReactNode => {
   const pathname = usePathname();
   const [navLinks, setNavlinks] = useState<NavLinksType[]>([
     {name: 'Home', href: '/', isActive: false},
-    {name: 'App', href: '/app/', isActive: false},
-    {name: 'About', href: '/about/', isActive: false},
+    {name: 'App', href: '/app', isActive: false},
+    {name: 'About', href: '/about', isActive: false},
   ]);
   
   useEffect(() => {
