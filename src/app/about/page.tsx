@@ -46,7 +46,7 @@ const Home = (): React.ReactNode => {
         <div
           className="flex flex-col justify-center items-center w-screen"
           style={{
-            backgroundImage: 'url("/cost-per-gram/hero_alt.png")',
+            backgroundImage: 'url("/hero_alt.png")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             height: '75vh'
