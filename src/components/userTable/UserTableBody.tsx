@@ -1,5 +1,5 @@
 import React from "react";
-import { TableDataType, OptionsType } from "@/types";
+import { TableDataType, UnitsType, TypeOptionsMapType, OptionsType } from "@/types";
 import { standardizeUnit, typeOptionsMap, calculateCostUse } from "@/utils";
 
 interface Props {
@@ -7,7 +7,7 @@ interface Props {
   setTableData: React.Dispatch<React.SetStateAction<TableDataType[]>>;
 }
 
-const unitOptions: OptionsType[] = [
+const unitOptions: UnitsType[] = [
   {text: 'g', value: 'g'},
   {text: 'kg', value: 'kg'},
   {text: 'ml', value: 'ml'},
@@ -20,13 +20,16 @@ const unitOptions: OptionsType[] = [
 const UserTableBody: React.FC<Props> = ({ tableData, setTableData }) => {
 
   const handleInput = (
-    e = React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
     targetIndex: number
   ): void => {
     const name = e.target.name;
-    let value = ['cost', 'weight', 'used'].includes(name)
-      ? +e.target.value
-      : e.target.value;
+    const value = e.target.value;
+    let numValue: number = parseFloat(value);
+
+    if (['cost', 'rawWeight', 'rawUsed'].includes(name)) {
+      if (isNaN(numValue)) numValue = 0;
+    }
 
     setTableData((prev) => {
       return prev.map((row, index) => {
@@ -35,30 +38,33 @@ const UserTableBody: React.FC<Props> = ({ tableData, setTableData }) => {
           let newCostUse;
           switch (name) {
             case "cost":
-              newCostUse = calculateCostUse(value, row.weight, row.used);
-              return {...row, [name]: value, costUse: newCostUse}
+              newCostUse = calculateCostUse(numValue, row.weight, row.used);
+              if (newCostUse === Infinity) newCostUse = 0;
+              return {...row, [name]: numValue, costUse: newCostUse}
             case "weight":
-              newValue = standardizeUnit(value, row.wUnit, row.type);
+              newValue = standardizeUnit(numValue, row.wUnit, row.type);
               newCostUse = calculateCostUse(row.cost, newValue, row.used);
               if (newCostUse === Infinity) newCostUse = 0;
               return {
                 ...row,
-                rawWeight: value,
+                rawWeight: numValue,
                 [name]: newValue,
                 costUse: newCostUse
               }
             case "used":
-              newValue = standardizeUnit(value, row.uUnit, row.type);
+              newValue = standardizeUnit(numValue, row.uUnit, row.type);
               newCostUse = calculateCostUse(row.cost, row.weight, newValue);
+              if (newCostUse === Infinity) newCostUse = 0;
               return {
                 ...row,
-                rawUsed: value,
+                rawUsed: numValue,
                 [name]: newValue,
                 costUse: newCostUse
               }
             case "wUnit":
               newValue = standardizeUnit(row.rawWeight, value, row.type);
               newCostUse = calculateCostUse(row.cost, newValue, row.used);
+              if (newCostUse === Infinity) newCostUse = 0;
               return {
                 ...row,
                 [name]: value,
@@ -68,6 +74,7 @@ const UserTableBody: React.FC<Props> = ({ tableData, setTableData }) => {
             case "uUnit":
               newValue = standardizeUnit(row.rawUsed, value, row.type);
               newCostUse = calculateCostUse(row.cost, row.weight, newValue);
+              if (newCostUse === Infinity) newCostUse = 0;
               return {
                 ...row,
                 [name]: value,
@@ -93,9 +100,13 @@ const UserTableBody: React.FC<Props> = ({ tableData, setTableData }) => {
               [&>td>*]:py-2
               [&>td>*]:rounded-xl
               [&>td>*]:focus:outline-none
+              [&>td>div>*]:focus:outline-none
               [&>td>*]:focus:ring-2
               [&>td>*]:focus:ring-purple-300
               [&>td]:p-3
+              [&>td>div]:focus-within:ring-2
+              [&>td>div]:focus-within:ring-purple-300
+              [&>td>*]:transition-all
               text-center
               text-white
             "
@@ -117,10 +128,10 @@ const UserTableBody: React.FC<Props> = ({ tableData, setTableData }) => {
                 onChange={(e)=>handleInput(e, row)}
               >
                 <option value="">n/a</option>
-                {typeOptionsMap.map((group) => {
+                {typeOptionsMap.map((group: TypeOptionsMapType) => {
                   return (
                     <optgroup key={group.name} label={group.name}>
-                      {group.options.map((option) => {
+                      {group.options.map((option: OptionsType) => {
                         return (
                           <option key={option.value} value={option.value}>
                             {option.text}
@@ -143,60 +154,60 @@ const UserTableBody: React.FC<Props> = ({ tableData, setTableData }) => {
               />
             </td>
             <td>
-              <input 
-                name="weight"
-                value={tableData[row]?.rawWeight || ""}
-                type="number"
-                placeholder="0.00"
-                className="w-25"
-                onChange={(e)=>handleInput(e, row)}
-              />
+              <div className="flex justify-between">
+                <input 
+                  name="weight"
+                  value={tableData[row]?.rawWeight || ""}
+                  type="number"
+                  placeholder="0.00"
+                  className="w-15"
+                  onChange={(e)=>handleInput(e, row)}
+                />
+                <select
+                  name="wUnit"
+                  value={tableData[row]?.wUnit || ""}
+                  onChange={(e)=>handleInput(e, row)}
+                >
+                  {unitOptions.map((option: UnitsType) => {
+                    return (
+                      <option 
+                        key={option.value} 
+                        value={option.value}
+                      >
+                        {option.text}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
             </td>
             <td>
-              <select
-                name="wUnit"
-                value={tableData[row]?.wUnit || ""}
-                onChange={(e)=>handleInput(e, row)}
-              >
-                {unitOptions.map((option) => {
-                  return (
-                    <option 
-                      key={option.value} 
-                      value={option.value}
-                    >
-                      {option.text}
-                    </option>
-                  );
-                })}
-              </select>
-            </td>
-            <td>
-              <input
-                name="used"
-                value={tableData[row]?.rawUsed || ""}
-                type="number"
-                placeholder="0.00"
-                className="w-25"
-                onChange={(e)=>handleInput(e, row)}
-              />
-            </td>
-            <td>
-              <select
-                name="uUnit"
-                value={tableData[row]?.uUnit || ""}
-                onChange={(e)=>handleInput(e, row)}
-              >
-                {unitOptions.map((option) => {
-                  return (
-                    <option 
-                      key={option.value} 
-                      value={option.value}
-                    >
-                      {option.text}
-                    </option>
-                  );
-                })}
-              </select>
+              <div className="flex justify-between">
+                <input
+                  name="used"
+                  value={tableData[row]?.rawUsed || ""}
+                  type="number"
+                  placeholder="0.00"
+                  className="w-15"
+                  onChange={(e)=>handleInput(e, row)}
+                />
+                <select
+                  name="uUnit"
+                  value={tableData[row]?.uUnit || ""}
+                  onChange={(e)=>handleInput(e, row)}
+                >
+                  {unitOptions.map((option: UnitsType) => {
+                    return (
+                      <option 
+                        key={option.value} 
+                        value={option.value}
+                      >
+                        {option.text}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
             </td>
             <td className="font-bold text-purple-200">
               {tableData[row].costUse ? tableData[row].costUse.toFixed(2) : '...'}

@@ -1,5 +1,5 @@
 export type SummaryRowType = {
-  type: "string";
-  wUnit: "string";
-  uUnit: "string";
+  type: "total";
+  wUnit: "kg" | "g";
+  uUnit: "kg" | "g";
 }

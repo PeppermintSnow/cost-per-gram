@@ -1,17 +1,18 @@
 interface Props {
   title: string;
+  children: React.ReactNode;
 }
 
 const AboutCard: React.FC<Props> = ({ title, children }) => {
   return (
-    <>
-      <div className="text-2xl bg-gray-600 font-extrabold text-white rounded-t-xl p-3 w-fit mt-5">
+    <div>
+      <div className="text-2xl bg-gray-800 font-extrabold text-white rounded-t-xl p-3 mt-5">
         {title}
       </div>
-      <div className="text-xl text-white bg-purple-700 font-bold p-3 rounded-xl rounded-ss-none w-100">
+      <div className="text-xl text-white bg-purple-800 font-bold p-3 rounded-b-xl w-100 text-justify h-fit md:h-60">
         {children}
       </div>
-    </>
+    </div>
   );
 }
 

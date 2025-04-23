@@ -6,4 +6,5 @@ export const convertUnit = (value: number, unit: string): number => {
     case "kg":
       return value / 1000;
   }
+  return 0;
 }

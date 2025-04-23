@@ -9,16 +9,16 @@ interface Props {
 
 const UserTableControls: React.FC<Props> = ({ tableData, setTableData }) => {
 
-  const handleControl = (type: "add | subtract | reset"): void => {
+  const handleControl = (type: "add" | "subtract" | "reset"): void => {
     switch (type) {
       case "add":
-        setTableData((prev) => [...prev, createNewRow(prev.length + 1)]);
+        setTableData((prev) => [...prev, createNewRow()]);
         break;
       case "subtract":
         if (tableData.length > 1) setTableData((prev) => prev.slice(0, -1));
         break;
       default:
-        setTableData([createNewRow(1)]);
+        setTableData([createNewRow()]);
         break;
     }
   }

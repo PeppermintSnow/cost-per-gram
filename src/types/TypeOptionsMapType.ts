@@ -1,6 +1,6 @@
 import { OptionsType } from "@/types";
 
-export type typeOptionsMapType = {
+export type TypeOptionsMapType = {
   name: string;
   options: OptionsType[];
 }

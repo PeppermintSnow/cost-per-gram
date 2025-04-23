@@ -10,7 +10,7 @@ interface NavLinksType {
 }
 
 
-const Navbar = (): JSX.Element => {
+const Navbar = (): React.ReactNode => {
   const pathname = usePathname();
   const [navLinks, setNavlinks] = useState<NavLinksType[]>([
     {name: 'Home', href: '/', isActive: false},
@@ -19,6 +19,7 @@ const Navbar = (): JSX.Element => {
   ]);
   
   useEffect(() => {
+    console.log(pathname);
     setNavlinks((links) => {
       return links.map((link) => ({
         ...link,

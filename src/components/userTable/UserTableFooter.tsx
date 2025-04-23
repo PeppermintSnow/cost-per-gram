@@ -1,22 +1,22 @@
 import { useState } from "react";
 import { RowDivider } from "@/components/userTable";
-import { TableDataType, SummaryRowType, OptionsType } from "@/types";
+import { TableDataType, SummaryRowType, UnitsType } from "@/types";
 import { convertUnit } from "@/utils";
 interface Props {
   tableData: TableDataType[];
-  setTableData: React.Dispatch<React.SetStateAction<TableDataType[]>>;
+ // setTableData: React.Dispatch<React.SetStateAction<TableDataType[]>>;
 }
 
-const typeOptions: OptionsType[] = [
+const typeOptions: UnitsType[] = [
   {text: 'Total', value: 'total'},
 ];
 
-const unitOptions: OptionsType[] = [
+const unitOptions: UnitsType[] = [
   {text: 'kg', value: 'kg'},
   {text: 'g', value: 'g'},
 ];
 
-const UserTableFooter: React.FC<Props> = ({ tableData, setTableData }) => {
+const UserTableFooter: React.FC<Props> = ({ tableData }) => {
   const [summaryInput, setSummaryInput] = useState<SummaryRowType>({
     type: "total",
     wUnit: "kg",
@@ -40,7 +40,11 @@ const UserTableFooter: React.FC<Props> = ({ tableData, setTableData }) => {
         [&>td>*]:focus:outline-none
         [&>td>*]:focus:ring-2
         [&>td>*]:focus:ring-purple-300
-        [&>td]:p-3 
+        [&>td>*]:transition
+        [&>td]:p-3
+        [&>td>div]:focus-within:ring-2
+        [&>td>div]:focus-within:ring-purple-300
+        [&>td>div]:transition
         text-center
         text-white
         font-bold
@@ -54,7 +58,7 @@ const UserTableFooter: React.FC<Props> = ({ tableData, setTableData }) => {
             name="type"
             onChange={(e) => handleInput(e)}
           >
-            {typeOptions.map((option) => {
+            {typeOptions.map((option: UnitsType) => {
               return (
                 <option 
                   key={option.value} 
@@ -70,50 +74,59 @@ const UserTableFooter: React.FC<Props> = ({ tableData, setTableData }) => {
           {tableData.reduce((total, row) => total + row.cost, 0).toFixed(2)}
         </td>
         <td>
-          {convertUnit(
-            tableData.reduce((total, row) => total + row.weight, 0),
-            summaryInput.wUnit
-          ).toFixed(2)}
+          <div className="flex justify-between">
+            <input 
+              value={convertUnit(
+                tableData.reduce((total, row) => total + row.weight, 0),
+                summaryInput.wUnit
+              ).toFixed(2)}
+              disabled
+              className="w-20 overflow-auto"
+            />
+            <select
+              name="wUnit"
+              onChange={(e) => handleInput(e)}
+            >
+              {unitOptions.map((option: UnitsType) => {
+                return (
+                  <option 
+                    key={option.value} 
+                    value={option.value}
+                  >
+                    {option.text}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
         </td>
         <td>
-          <select
-            name="wUnit"
-            onChange={(e) => handleInput(e)}
-          >
-            {unitOptions.map((option) => {
-              return (
-                <option 
-                  key={option.value} 
-                  value={option.value}
-                >
-                  {option.text}
-                </option>
-              );
-            })}
-          </select>
-        </td>
-        <td>
-          {convertUnit(
-            tableData.reduce((total, row) => total + row.used, 0),
-            summaryInput.uUnit
-          ).toFixed(2)}
-        </td>
-        <td>
-          <select
-            name="uUnit"
-            onChange={(e) => handleInput(e)}
-          >
-            {unitOptions.map((option) => {
-              return (
-                <option 
-                  key={option.value} 
-                  value={option.value}
-                >
-                  {option.text}
-                </option>
-              );
-            })}
-          </select>
+          <div className="flex justify-between">
+            <input 
+              value={convertUnit(
+                tableData.reduce((total, row) => total + row.used, 0),
+                summaryInput.uUnit
+              ).toFixed(2)}
+              disabled
+              className="w-20 overflow-auto me-1"
+
+            />
+            <select
+              name="uUnit"
+              onChange={(e) => handleInput(e)}
+            >
+              {unitOptions.map((option: UnitsType) => {
+                return (
+                  <option 
+                    key={option.value} 
+                    value={option.value}
+                  >
+                    {option.text}
+                  </option>
+                );
+              })}
+            </select>
+          </div>
         </td>
         <td>
           {tableData.reduce((total, row) => total + (row.costUse || 0), 0).toFixed(2)}
