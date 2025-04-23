@@ -93,9 +93,13 @@ const UserTableBody: React.FC<Props> = ({ tableData, setTableData }) => {
               [&>td>*]:py-2
               [&>td>*]:rounded-xl
               [&>td>*]:focus:outline-none
+              [&>td>div>*]:focus:outline-none
               [&>td>*]:focus:ring-2
               [&>td>*]:focus:ring-purple-300
               [&>td]:p-3
+              [&>td>div]:focus-within:ring-2
+              [&>td>div]:focus-within:ring-purple-300
+              [&>td>*]:transition-all
               text-center
               text-white
             "
@@ -143,60 +147,60 @@ const UserTableBody: React.FC<Props> = ({ tableData, setTableData }) => {
               />
             </td>
             <td>
-              <input 
-                name="weight"
-                value={tableData[row]?.rawWeight || ""}
-                type="number"
-                placeholder="0.00"
-                className="w-25"
-                onChange={(e)=>handleInput(e, row)}
-              />
+              <div className="flex justify-between">
+                <input 
+                  name="weight"
+                  value={tableData[row]?.rawWeight || ""}
+                  type="number"
+                  placeholder="0.00"
+                  className="w-15"
+                  onChange={(e)=>handleInput(e, row)}
+                />
+                <select
+                  name="wUnit"
+                  value={tableData[row]?.wUnit || ""}
+                  onChange={(e)=>handleInput(e, row)}
+                >
+                  {unitOptions.map((option) => {
+                    return (
+                      <option 
+                        key={option.value} 
+                        value={option.value}
+                      >
+                        {option.text}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
             </td>
             <td>
-              <select
-                name="wUnit"
-                value={tableData[row]?.wUnit || ""}
-                onChange={(e)=>handleInput(e, row)}
-              >
-                {unitOptions.map((option) => {
-                  return (
-                    <option 
-                      key={option.value} 
-                      value={option.value}
-                    >
-                      {option.text}
-                    </option>
-                  );
-                })}
-              </select>
-            </td>
-            <td>
-              <input
-                name="used"
-                value={tableData[row]?.rawUsed || ""}
-                type="number"
-                placeholder="0.00"
-                className="w-25"
-                onChange={(e)=>handleInput(e, row)}
-              />
-            </td>
-            <td>
-              <select
-                name="uUnit"
-                value={tableData[row]?.uUnit || ""}
-                onChange={(e)=>handleInput(e, row)}
-              >
-                {unitOptions.map((option) => {
-                  return (
-                    <option 
-                      key={option.value} 
-                      value={option.value}
-                    >
-                      {option.text}
-                    </option>
-                  );
-                })}
-              </select>
+              <div className="flex justify-between">
+                <input
+                  name="used"
+                  value={tableData[row]?.rawUsed || ""}
+                  type="number"
+                  placeholder="0.00"
+                  className="w-15"
+                  onChange={(e)=>handleInput(e, row)}
+                />
+                <select
+                  name="uUnit"
+                  value={tableData[row]?.uUnit || ""}
+                  onChange={(e)=>handleInput(e, row)}
+                >
+                  {unitOptions.map((option) => {
+                    return (
+                      <option 
+                        key={option.value} 
+                        value={option.value}
+                      >
+                        {option.text}
+                      </option>
+                    );
+                  })}
+                </select>
+              </div>
             </td>
             <td className="font-bold text-purple-200">
               {tableData[row].costUse ? tableData[row].costUse.toFixed(2) : '...'}

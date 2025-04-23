@@ -7,7 +7,15 @@ interface Props {
 
 const UserTableHeader: React.FC<Props> = ({ headers, setHeaders }) => {
   return (
-    <div className="flex justify-center items-center bg-gray-800 p-3 rounded-xl rounded-b-none w-fit gap-5">
+    <div className="
+      flex justify-center items-center 
+      bg-gray-800 p-3 rounded-xl 
+      rounded-b-none w-fit gap-5 
+      [&>*]:focus:outline-none 
+      [&>*]:focus:ring-2 
+      [&>*]:transition-all
+      "
+    >
       <input 
         className="bg-gray-700 px-3 py-2 rounded-xl text-white"
         placeholder="Recipe name"
