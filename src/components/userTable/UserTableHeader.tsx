@@ -1,5 +1,3 @@
-import { UserTableHeadersType } from "@/types";
-
 const UserTableHeader = (): JSX.Element => {
   return (
     <div className="
