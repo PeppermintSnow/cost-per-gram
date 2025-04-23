@@ -28,7 +28,7 @@ const UserTable = (): JSX.Element => {
               <UserTableBody tableData={tableData} setTableData={setTableData}  />
             </tbody>
             <tfoot>
-              <UserTableFooter tableData={tableData} setTableData={setTableData} />
+              <UserTableFooter tableData={tableData} />
             </tfoot>
           </table>
         </div>

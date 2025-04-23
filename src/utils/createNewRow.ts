@@ -1,6 +1,6 @@
 import { TableDataType } from "@/types";
 
-export const createNewRow = (id: number): TableDataType => ({
+export const createNewRow = (): TableDataType => ({
   ingredient: "",
   type: "",
   cost: 0,

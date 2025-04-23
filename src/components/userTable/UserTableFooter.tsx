@@ -4,7 +4,7 @@ import { TableDataType, SummaryRowType, OptionsType } from "@/types";
 import { convertUnit } from "@/utils";
 interface Props {
   tableData: TableDataType[];
-  setTableData: React.Dispatch<React.SetStateAction<TableDataType[]>>;
+ // setTableData: React.Dispatch<React.SetStateAction<TableDataType[]>>;
 }
 
 const typeOptions: OptionsType[] = [
@@ -16,7 +16,7 @@ const unitOptions: OptionsType[] = [
   {text: 'g', value: 'g'},
 ];
 
-const UserTableFooter: React.FC<Props> = ({ tableData, setTableData }) => {
+const UserTableFooter: React.FC<Props> = ({ tableData }) => {
   const [summaryInput, setSummaryInput] = useState<SummaryRowType>({
     type: "total",
     wUnit: "kg",

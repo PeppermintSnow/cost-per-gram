@@ -1,11 +1,6 @@
 import { UserTableHeadersType } from "@/types";
 
-interface Props {
-  headers?: { name: string, yield: number },
-  setHeaders?: React.Dispatch<React.SetStateAction<UserTableHeadersType>>
-}
-
-const UserTableHeader: React.FC<Props> = ({ headers, setHeaders }) => {
+const UserTableHeader = (): JSX.Element => {
   return (
     <div className="
       flex justify-center items-center 

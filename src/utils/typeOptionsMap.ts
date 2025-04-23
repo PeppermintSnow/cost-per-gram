@@ -1,4 +1,4 @@
-import { OptionsType, TypeOptionsMapType } from "@/types";
+import { TypeOptionsMapType } from "@/types";
 
 export const typeOptionsMap: TypeOptionsMapType = [
   // Value of type options are density constants to be used for conversion

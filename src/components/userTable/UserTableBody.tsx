@@ -24,7 +24,7 @@ const UserTableBody: React.FC<Props> = ({ tableData, setTableData }) => {
     targetIndex: number
   ): void => {
     const name = e.target.name;
-    let value = ['cost', 'weight', 'used'].includes(name)
+    const value = ['cost', 'weight', 'used'].includes(name)
       ? +e.target.value
       : e.target.value;
 

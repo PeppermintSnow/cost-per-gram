@@ -2,7 +2,7 @@ import AboutCard from "@/components/AboutCard";
 
 type CardsType = {
   title: string;
-  body: string | Record<string, JSX.Element>;
+  body: string | JSX.Element;
 }
 const cards: CardsType[] = [
   {
