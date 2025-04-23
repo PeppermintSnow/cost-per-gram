@@ -19,10 +19,11 @@ const Navbar = (): JSX.Element => {
   ]);
   
   useEffect(() => {
+    console.log(pathname);
     setNavlinks((links) => {
       return links.map((link) => ({
         ...link,
-        isActive: link.href === pathname,
+        isActive: `${link.href}/` === pathname,
       }));
     });
   }, [pathname]);

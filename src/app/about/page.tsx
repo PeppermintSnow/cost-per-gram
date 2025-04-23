@@ -46,7 +46,7 @@ const Home = (): JSX.Element => {
         <div
           className="flex flex-col justify-center items-center w-screen"
           style={{
-            backgroundImage: 'url("/hero.png")',
+            backgroundImage: 'url("/cost-per-gram/hero_alt.png")',
             backgroundSize: 'cover',
             backgroundPosition: 'center',
             height: '75vh'
