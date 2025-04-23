@@ -1,4 +1,4 @@
-const RowDivider = (): JSX.Element => {
+const RowDivider = (): React.ReactNode => {
   return (
     <tr>
       <td colSpan={12} className="p-0">

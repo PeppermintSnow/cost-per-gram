@@ -1,6 +1,6 @@
 import { TypeOptionsMapType } from "@/types";
 
-export const typeOptionsMap: TypeOptionsMapType = [
+export const typeOptionsMap: TypeOptionsMapType[] = [
   // Value of type options are density constants to be used for conversion
   {
     name: 'Flours', options: [

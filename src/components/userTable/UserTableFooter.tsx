@@ -1,17 +1,17 @@
 import { useState } from "react";
 import { RowDivider } from "@/components/userTable";
-import { TableDataType, SummaryRowType, OptionsType } from "@/types";
+import { TableDataType, SummaryRowType, UnitsType } from "@/types";
 import { convertUnit } from "@/utils";
 interface Props {
   tableData: TableDataType[];
  // setTableData: React.Dispatch<React.SetStateAction<TableDataType[]>>;
 }
 
-const typeOptions: OptionsType[] = [
+const typeOptions: UnitsType[] = [
   {text: 'Total', value: 'total'},
 ];
 
-const unitOptions: OptionsType[] = [
+const unitOptions: UnitsType[] = [
   {text: 'kg', value: 'kg'},
   {text: 'g', value: 'g'},
 ];
@@ -58,7 +58,7 @@ const UserTableFooter: React.FC<Props> = ({ tableData }) => {
             name="type"
             onChange={(e) => handleInput(e)}
           >
-            {typeOptions.map((option) => {
+            {typeOptions.map((option: UnitsType) => {
               return (
                 <option 
                   key={option.value} 
@@ -87,7 +87,7 @@ const UserTableFooter: React.FC<Props> = ({ tableData }) => {
               name="wUnit"
               onChange={(e) => handleInput(e)}
             >
-              {unitOptions.map((option) => {
+              {unitOptions.map((option: UnitsType) => {
                 return (
                   <option 
                     key={option.value} 
@@ -115,7 +115,7 @@ const UserTableFooter: React.FC<Props> = ({ tableData }) => {
               name="uUnit"
               onChange={(e) => handleInput(e)}
             >
-              {unitOptions.map((option) => {
+              {unitOptions.map((option: UnitsType) => {
                 return (
                   <option 
                     key={option.value} 

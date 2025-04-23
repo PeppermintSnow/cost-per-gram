@@ -10,8 +10,8 @@ import {
 import { TableDataType } from "@/types";
 import { createNewRow } from "@/utils";
 
-const UserTable = (): JSX.Element => {
-  const [tableData, setTableData] = useState<TableDataType[]>([createNewRow(1)]);
+const UserTable = (): React.ReactNode => {
+  const [tableData, setTableData] = useState<TableDataType[]>([createNewRow()]);
   return (
     <>
       <div className="flex justify-center my-5">

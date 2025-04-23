@@ -8,7 +8,6 @@ export const standardizeUnit = (
   type: string,
 ): number  => {
   const density = findDensity(type);
-  console.log(value, unit, type);
   switch (unit) {
     case "g":
       return value;
@@ -25,6 +24,7 @@ export const standardizeUnit = (
     case "tsp":
       return value * (4.9289 * density);
   }
+  return 0;
 }
 
 const findDensity = (type: string): number => {

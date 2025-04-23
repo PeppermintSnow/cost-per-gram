@@ -2,7 +2,7 @@ import AboutCard from "@/components/AboutCard";
 
 type CardsType = {
   title: string;
-  body: string | JSX.Element;
+  body: string | React.ReactNode;
 }
 const cards: CardsType[] = [
   {
@@ -39,7 +39,7 @@ const cards: CardsType[] = [
   }
 ];
 
-const Home = (): JSX.Element => {
+const Home = (): React.ReactNode => {
   return (
     <>
       <main>

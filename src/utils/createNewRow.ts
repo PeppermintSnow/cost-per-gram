@@ -10,6 +10,6 @@ export const createNewRow = (): TableDataType => ({
   rawUsed: 0,
   uUnit: "g",
   used: 0,
-  costUse: ""
+  costUse: 0
 });
 

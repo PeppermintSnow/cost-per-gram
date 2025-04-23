@@ -1,4 +1,4 @@
-export type UserTableHeaders = {
+export type UserTableHeadersType = {
   name: string;
   yield: string;
 }

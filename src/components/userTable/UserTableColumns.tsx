@@ -1,4 +1,4 @@
-const UserTableColumns = (): JSX.Element => {
+const UserTableColumns = (): React.ReactNode => {
   return (
     <tr className="[&>*]:p-3 text-white">
       <th>Ingredient</th>

@@ -1,5 +1,6 @@
 interface Props {
   title: string;
+  children: React.ReactNode;
 }
 
 const AboutCard: React.FC<Props> = ({ title, children }) => {

@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-const Home = (): JSX.Element => {
+const Home = (): React.ReactNode => {
   return (
     <>
       <main className="bg-gray-900">

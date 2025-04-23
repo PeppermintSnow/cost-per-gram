@@ -1,4 +1,6 @@
-export { UserTableHeadersType } from "./UserTableHeadersType";
-export { TableDataType } from "./TableDataType";
-export { OptionsType } from "./OptionsType";
-export { TypeOptionsMapType } from "./TypeOptionsMapType";
+export type { UserTableHeadersType } from "./UserTableHeadersType";
+export type { TableDataType } from "./TableDataType";
+export type { OptionsType } from "./OptionsType";
+export type { UnitsType } from "./UnitsType";
+export type { SummaryRowType } from "./SummaryRowType";
+export type { TypeOptionsMapType } from "./TypeOptionsMapType";

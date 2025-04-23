@@ -1,4 +1,4 @@
-const UserTableHeader = (): JSX.Element => {
+const UserTableHeader = (): React.ReactNode => {
   return (
     <div className="
       flex justify-center items-center 

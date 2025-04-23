@@ -1,6 +1,6 @@
 import UserTable from "@/components/userTable/UserTable";
 
-const App = (): JSX.Element => {
+const App = (): React.ReactNode => {
   return (
     <>
       <p className="text-gray-700 mt-5 text-center">
