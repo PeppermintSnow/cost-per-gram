@@ -16,7 +16,7 @@ export const standardizeUnit = (
     case "ml":
       return value * density;
     case "l":
-      return (value / 1000) * density;
+      return value * 1000 * density;
     case "cup":
       return value * 236.5882 * density;
     case "tbsp":
