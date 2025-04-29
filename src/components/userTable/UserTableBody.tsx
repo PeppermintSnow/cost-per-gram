@@ -37,6 +37,18 @@ const UserTableBody: React.FC<Props> = ({ tableData, setTableData }) => {
           let newValue;
           let newCostUse;
           switch (name) {
+            case "type":
+              const newWeight = standardizeUnit(row.rawWeight, row.wUnit, value);
+              const newUsed = standardizeUnit(row.rawUsed, row.uUnit, value);
+              newCostUse = calculateCostUse(row.cost, newWeight, newUsed);
+              if (newCostUse === Infinity) newCostUse = 0;
+              return {
+                ...row, 
+                [name]: value, 
+                costUse: newCostUse, 
+                used: newUsed,
+                weight: newWeight
+              }
             case "cost":
               newCostUse = calculateCostUse(numValue, row.weight, row.used);
               if (newCostUse === Infinity) newCostUse = 0;
