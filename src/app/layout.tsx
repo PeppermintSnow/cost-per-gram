@@ -28,7 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        style={{backgroundColor: '#101828'}}
+        style={{backgroundColor: '#101828', height: '100vh'}}
       >
         <Analytics />
         <Navbar />
